@@ -14,7 +14,10 @@ router.post('/add-product', adminContollers.addPostProduct)
 // /admin/product-list => GET
 router.get('/product-list', adminContollers.adminProductList);
 
-// /admin/edit-product => EDIT
+// /admin/edit-product => GET
+router.get('/edit-product', adminContollers.editProduct)
+
+// /admin/edit-product => POST
 router.post('/edit-product', adminContollers.editProduct)
 
 

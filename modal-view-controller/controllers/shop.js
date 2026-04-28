@@ -18,6 +18,10 @@ exports.getCard = (req, res, next)=> {
     res.render('shop/cart', {pagetitle: 'Cart Page', path : '/cart'})
 }
 
+exports.getOrders = (req, res, next)=> {
+    res.render('shop/orders', {pagetitle: 'Order Page', path : '/orders'})
+}
+
 exports.getCheckout = (req, res, next)=> {
     res.render('shop/checkout', {pagetitle: 'Checkout Page', path : '/checkout'})
 }
