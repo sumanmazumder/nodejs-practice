@@ -7,8 +7,12 @@ exports.addGetProducts = (req, res, next) => {
 
 //POST Add Product
 exports.addPostProduct = (req, res, next) => {
-    console.log(req.body)
-    const allProduct = new ProductModules(req.body.title);
+    console.log(req.body);
+    const title = req.body.title;
+    const imgUrl = req.body.imgUrl;
+    const price = req.body.price;
+    const des = req.body.des;
+    const allProduct = new ProductModules(title, imgUrl, price, des);
     allProduct.saveProduct();
     res.redirect('/')
 }
@@ -21,7 +25,7 @@ exports.editProduct = (req, res, next) => {
 
 // Product List
 exports.adminProductList = (req, res, next)=> {
-    ProductModules.fetchAllPrduct(allProducts=> {
-        res.render('admin/products', {pagetitle: 'Admin product list', path: '/admin/products', products: allProducts })
+    ProductModules.fetchAllPrduct(allProducts => {
+        res.render('admin/product-list', {pagetitle: 'Admin product list', path : '/admin/product-list', products: allProducts})
     })
 }

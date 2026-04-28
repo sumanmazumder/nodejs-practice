@@ -12,7 +12,7 @@ router.get('/add-product', adminContollers.addGetProducts)
 router.post('/add-product', adminContollers.addPostProduct)
 
 // /admin/product-list => GET
-router.get('/prduct-list', adminContollers.adminProductList);
+router.get('/product-list', adminContollers.adminProductList);
 
 // /admin/edit-product => EDIT
 router.post('/edit-product', adminContollers.editProduct)
