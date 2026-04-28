@@ -3,10 +3,20 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 
-const productContollers = require('../controllers/product');
+const adminContollers = require('../controllers/admin');
 
-router.get('/add-product', productContollers.addGetProducts)
+// /admin/add-product => GET
+router.get('/add-product', adminContollers.addGetProducts)
 
-router.post('/add-product', productContollers.addPostProduct)
+// /admin/add-product => POST
+router.post('/add-product', adminContollers.addPostProduct)
+
+// /admin/product-list => GET
+router.get('/prduct-list', adminContollers.adminProductList);
+
+// /admin/edit-product => EDIT
+router.post('/edit-product', adminContollers.editProduct)
+
+
 
 module.exports = router;
