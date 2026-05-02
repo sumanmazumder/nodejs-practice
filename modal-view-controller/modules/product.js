@@ -44,8 +44,6 @@ module.exports = class Product {
                 cb([])
             }
             const products = JSON.parse(fileContent);
-            console.log("product details", id);
-
             const product = products.find(p => p.id === id);
             // console.log("product details", product);
             cb(product);
