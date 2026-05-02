@@ -1,11 +1,20 @@
 const ProductModules = require('../modules/product');
 
-exports.getProduct = (req, res, next) => {
+exports.getProducts = (req, res, next) => {
     // const allProduct = new productModules();
     ProductModules.fetchAllPrduct(allProducts => {
         res.render('shop/product-list', { pagetitle: "Product List", shopActive: true, path: '/products', formCss: true, productCss: true, hasProduct: allProducts.length > 0, products: allProducts });
 
     });
+}
+
+exports.getProduct = (req, res, next) => {
+    const prodId = req.params.productId;
+    console.log("product id", prodId);
+    ProductModules.findProduct(prodId, product => {
+        res.render('shop/product-details', {pagetitle: "Product details", path: '/products', product: product});
+    })
+
 }
 
 exports.getIndex = (req, res, next)=> {
