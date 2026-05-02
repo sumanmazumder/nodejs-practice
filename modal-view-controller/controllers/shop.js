@@ -10,7 +10,7 @@ exports.getProducts = (req, res, next) => {
 
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
-    ProductModules.findProduct(prodId, product => {
+    ProductModules.findById(prodId, product => {
         res.render('shop/product-details', {pagetitle: "Product details", path: '/products', product: product});
     })
 

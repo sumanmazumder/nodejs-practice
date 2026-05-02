@@ -193,6 +193,15 @@ form {
   color: white;
 }
 
+.centered {
+  width: 50%;
+  display: table;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid #ccc;
+}
+
+
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;

@@ -37,7 +37,7 @@ module.exports = class Product {
         })
     }
 
-    static findProduct(id, cb) {
+    static findById(id, cb) {
         const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
         fs.readFile(p, (err, fileContent) => {
             if (err) {
