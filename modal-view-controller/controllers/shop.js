@@ -24,18 +24,17 @@ exports.getIndex = (req, res, next)=> {
 }
 
 exports.getCard = (req, res, next)=> {
-    const prodId = req.body.productId;
     console.log(prodId);
     res.render('shop/cart', {pagetitle: 'Cart Page', path : '/cart'})
 }
 
 exports.postCard = (req, res, next) => {
-    const proId = req.body.productId;
-    console.log("prodId===========================>", prodId);
-    ProductModules.findById(proId, product=> {
-        CardModule.getCart(proId, product);
-    })
-    res.render()
+    const productId = req.body.productId;
+    console.log("proId===========================>", productId);
+    ProductModules.findById(productId, product => {
+        CardModule.getCart(productId, product);
+    });
+    res.redirect('/cart');
 }
 
 exports.getOrders = (req, res, next)=> {

@@ -5,6 +5,6 @@ const p = path.join(path.dirname(process.mainModule.filename), 'data', 'cart.jso
 
 module.exports = class Card {
     static getCart (id, product) {
-        console.lof("Cart Product", product);
+        console.log("Cart Product", product);
     }
 }
