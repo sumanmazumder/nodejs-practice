@@ -1,4 +1,5 @@
 const ProductModules = require('../modules/product');
+const CardModule = require('../modules/cart');
 
 exports.getProducts = (req, res, next) => {
     // const allProduct = new productModules();
@@ -23,7 +24,18 @@ exports.getIndex = (req, res, next)=> {
 }
 
 exports.getCard = (req, res, next)=> {
+    const prodId = req.body.productId;
+    console.log(prodId);
     res.render('shop/cart', {pagetitle: 'Cart Page', path : '/cart'})
+}
+
+exports.postCard = (req, res, next) => {
+    const proId = req.body.productId;
+    console.log("prodId===========================>", prodId);
+    ProductModules.findById(proId, product=> {
+        CardModule.getCart(proId, product);
+    })
+    res.render()
 }
 
 exports.getOrders = (req, res, next)=> {

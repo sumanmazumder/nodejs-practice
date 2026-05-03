@@ -9,15 +9,20 @@ router.get('/', shopController.getIndex);
 // /shop product list page
 router.get('/products', shopController.getProducts);
 
-router.get('/products/:productId', shopController.getProduct)
+router.get('/products/:productId', shopController.getProduct) // product details
 
 // /shop cart page
 router.get('/cart', shopController.getCard);
+
+router.get('/cart', shopController.postCard);
+
+router.get('/orders', shopController.getOrders);
+
 
 // /shop checkout page
 router.get('/checkout', shopController.getCheckout);
 
 
-router.get('/orders', shopController.getOrders);
+
 
 module.exports = router;

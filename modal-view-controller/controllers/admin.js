@@ -11,8 +11,8 @@ exports.postAddProduct = (req, res, next) => {
     const title = req.body.title;
     const imgUrl = req.body.imgUrl;
     const price = req.body.price;
-    const des = req.body.des;
-    const allProduct = new ProductModules(title, imgUrl, price, des);
+    const description = req.body.description;
+    const allProduct = new ProductModules(null, title, imgUrl, price, description);
     allProduct.saveProduct();
     res.redirect('/')
 }
@@ -38,15 +38,13 @@ exports.getEditProduct = (req, res, next) => {
 }
 
 exports.postEditProduct = (req, res, next) => {
-    // Implement post edit logic here
-    
     const updateProId = req.body.productId;
     const updateProTitle = req.body.title;
     const updateProPrice = req.body.price;
     const updateProimgUrl = req.body.imgUrl;
     const updateProDescription = req.body.description;
 
-    const updateProduct = new ProductModules(updateProId, updateProTitle, updateProimgUrl,  updateProPrice, updateProDescription);
+    const updateProduct = new ProductModules(updateProId, updateProTitle, updateProimgUrl, updateProPrice, updateProDescription);
     updateProduct.saveProduct();
     res.redirect('/admin/product-list');
 };
