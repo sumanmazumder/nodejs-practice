@@ -23,18 +23,17 @@ exports.getIndex = (req, res, next)=> {
     })
 }
 
-exports.getCard = (req, res, next)=> {
-    console.log(prodId);
-    res.render('shop/cart', {pagetitle: 'Cart Page', path : '/cart'})
+exports.postCard = (req, res, next) => {
+    const proId = req.body.proId;
+    ProductModules.findById(proId, product => {
+        CardModule.addCart(proId, product);
+    });
+    res.render()
+    // res.redirect('/cart');
 }
 
-exports.postCard = (req, res, next) => {
-    const productId = req.body.productId;
-    console.log("proId===========================>", productId);
-    ProductModules.findById(productId, product => {
-        CardModule.getCart(productId, product);
-    });
-    res.redirect('/cart');
+exports.getCart = (req, res, next)=> {
+    res.render('shop/cart', {pagetitle: 'Cart Page', path : '/cart'})
 }
 
 exports.getOrders = (req, res, next)=> {
@@ -45,6 +44,6 @@ exports.getCheckout = (req, res, next)=> {
     res.render('shop/checkout', {pagetitle: 'Checkout Page', path : '/checkout'})
 }
 
-exports.productDeatils = (req, res, next) => {
-    res.render('shop/product-details', {pagetitle: 'Product deatisl Page', path : '/product-details'})
+exports.postCartDeleteProduct = (req, res, next)=> {
+    
 }

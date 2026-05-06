@@ -65,4 +65,24 @@ module.exports = class Product {
             cb(product);
         })
     }
+
+    static deleteProduct(id) {
+        const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
+        fs.readFile(p, (err, fileContent) => {
+            if (err) {
+                cb([]);
+            } else {
+                const products = JSON.parse(fileContent);
+                // const findProduct = products.find((prod)=> prod.id !== id);
+                const updateProduct = products.filter((prod) => prod.id !== id);
+
+                fs.writeFile(p, JSON.stringify(updateProduct), err => {
+                    if (!err) {
+                        console.log("deleted product");
+                    }
+                })
+
+            }
+        })
+    }
 }
