@@ -12,14 +12,14 @@ exports.getProducts = (req, res, next) => {
 exports.getProduct = (req, res, next) => {
     const prodId = req.params.productId;
     ProductModules.findById(prodId, product => {
-        res.render('shop/product-details', {pagetitle: "Product details", path: '/products', product: product});
+        res.render('shop/product-details', { pagetitle: "Product details", path: '/products', product: product });
     })
 
 }
 
-exports.getIndex = (req, res, next)=> {
+exports.getIndex = (req, res, next) => {
     ProductModules.fetchAllPrduct(allProducts => {
-        res.render('shop/index', {pagetitle: 'Shop', path : '/', products: allProducts})
+        res.render('shop/index', { pagetitle: 'Shop', path: '/', products: allProducts })
     })
 }
 
@@ -28,22 +28,32 @@ exports.postCard = (req, res, next) => {
     ProductModules.findById(proId, product => {
         CardModule.addCart(proId, product);
     });
-    res.render()
-    // res.redirect('/cart');
+    res.redirect('/cart');
 }
 
-exports.getCart = (req, res, next)=> {
-    res.render('shop/cart', {pagetitle: 'Cart Page', path : '/cart'})
+exports.getCart = (req, res, next) => {
+    CardModule.getCart(cart => {
+        const products = cart ? cart.products : [];
+        res.render('shop/cart', {
+            pagetitle: 'Cart Page',
+            path: '/cart',
+            products: products
+        });
+    });
 }
 
-exports.getOrders = (req, res, next)=> {
-    res.render('shop/orders', {pagetitle: 'Order Page', path : '/orders'})
+exports.getOrders = (req, res, next) => {
+    res.render('shop/orders', { pagetitle: 'Order Page', path: '/orders' })
 }
 
-exports.getCheckout = (req, res, next)=> {
-    res.render('shop/checkout', {pagetitle: 'Checkout Page', path : '/checkout'})
+exports.getCheckout = (req, res, next) => {
+    res.render('shop/checkout', { pagetitle: 'Checkout Page', path: '/checkout' })
 }
 
-exports.postCartDeleteProduct = (req, res, next)=> {
-    
+exports.postCartDeleteProduct = (req, res, next) => {
+    const prodId = req.body.productId;
+    ProductModules.findById(prodId, product => {
+        CardModule.deleteCartItem(prodId, product.price);
+        res.redirect('/cart');
+    });
 }

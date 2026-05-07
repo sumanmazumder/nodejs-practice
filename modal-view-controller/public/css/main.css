@@ -201,6 +201,32 @@ form {
   border: 1px solid #ccc;
 }
 
+.cart-display {
+  display: grid;
+  align-items: stretch;
+  gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+}
+.cart-item {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #f1f1f1;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  box-sizing: border-box;
+  gap: 15px;
+}
+.cart-item .cart-image {
+  flex: 0 0 30%;
+}
+.cart-item .cart-image img {
+  width: 100%;
+}
+
+.cart-item p {
+  margin: 0px;
+}
 
 @media (min-width: 768px) {
   .main-header__nav {
