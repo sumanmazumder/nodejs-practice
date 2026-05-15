@@ -1,0 +1,40 @@
+<%- include('../includes/header.ejs') %>
+    </head>
+    <link rel="stylesheet" href="/css/product.css">
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <main>
+                <% if (product.length> 0) { %>
+                    <div class="grid">
+                        <% for(let item of product) { %>
+                            <article class="card product-item">
+                                <header class="card__header">
+                                    <h1>
+                                        <%= item?.title %>
+                                    </h1>
+                                </header>
+                                <div class="card__image"><img src="<%= item?.imgUrl %>" alt="A Book" /></div>
+                                <div class="card__content">
+                                    <p>
+                                        <%= item?.price %>
+                                    </p>
+                                    <p>
+                                        <%= item?.description %>
+                                    </p>
+                                </div>
+                                <div class="class=" card__actions"">
+                                    <form method="post" action="/cart">
+                                        <input type="hidden" name="prodId" value="<%= item?.id %>" />
+                                        <button class="btn">Add to cart</botton>
+                                    </form>
+                                </div>
+                            </article>
+                            <% } %>
+                    </div>
+                    <% } %>
+            </main>
+    </body>
+
+
+    <%- include('../includes/end.ejs') %>

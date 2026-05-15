@@ -1,0 +1,38 @@
+<%- include('../includes/header.ejs') %>
+<link rel="stylesheet" href="/css/product.css">
+    </head>
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+            <main>
+                <% if (product.length> 0) { %>
+                    <div class="grid">
+                        <% for(let item of product) { %>
+                            <article class="card product-item">
+                                <header class="card__header">
+                                    <h1>
+                                        <%= item?.title %>
+                                    </h1>
+                                </header>
+                                <div class="card__image">
+                                    <img src="<%= item?.imgUrl %>" />
+                                </div>
+                                <div class="card__content">
+                                    <p><%= item?.price %></p>
+                                    <p><%= item?.description %></p>
+                                </div>
+                                <div class="class="card__actions"">
+                                    <a href="/admin/edit-product/<%= item?.id %>?edit=true" class="btn">Edit</a>
+                                    <form action="/admin/delete-product" method="POST">
+                                        <input type="hidden" value="<%= item?.id %>" name="prodId" />
+                                        <button type="submit" class="btn">Delete</button>
+                                    </form>
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                    <% } %>
+            </main>
+    </body>
+
+
+    <%- include('../includes/end.ejs') %>

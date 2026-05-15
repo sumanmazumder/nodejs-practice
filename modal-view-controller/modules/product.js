@@ -13,7 +13,6 @@ module.exports = class Product {
 
     saveProduct() {
         const p = path.join(path.dirname(process.mainModule.filename), 'data', 'products.json');
-
         fs.readFile(p, (err, fileContent) => {
             let products = [];
             if (!err) {
