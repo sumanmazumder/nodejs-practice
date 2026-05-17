@@ -1,5 +1,5 @@
 const Product = require('../modules/product');
-const Cart = require('../modules/cartModule');
+const CardModule = require('../modules/cartModule');
 
 exports.getIndex = (req, res, next) => {
     Product.findAll().then(result => {
@@ -42,6 +42,8 @@ exports.getProductDetails = (req, res, next) => {
 }
 
 exports.getCart = (req, res, next) => {
+    
+
     res.render('shop/cart', {
         pageTitle: 'Cart Page',
         path: '/cart',
@@ -51,10 +53,26 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
     const proId = req.body.prodId;
+   
+
+
+    res.redirect('/cart');
 
 }
 
 exports.postCartDeleteProduct = (req, res, next) => {
     const prodId = req.body.productId;
+    // Find the product price from the cart as a fallback if product lookup fails
+    // CardModule.getCart(cart => {
+    //     if (!cart || !cart.products) {
+    //         return res.redirect('/cart');
+    //     }
+    //     const cartProduct = cart.products.find(p => p.id === prodId);
+    //     if (!cartProduct) {
+    //         return res.redirect('/cart');
+    //     }
+    //     CardModule.deleteCartItem(prodId, cartProduct.price);
+    //     res.redirect('/cart');
+    // });
 
 }
