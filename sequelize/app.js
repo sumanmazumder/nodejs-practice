@@ -64,9 +64,9 @@ app.set('views', 'views');
 
 
 sequelize
-    // .sync({force: true})
+    .sync({force: true})
     // Use alter to update database schema without dropping tables
-    .sync({ alter: true })
+    // .sync({ alter: true })
     .then(result=> {return User.findByPk(1)})
     .then(user => {
         if (!user) {
