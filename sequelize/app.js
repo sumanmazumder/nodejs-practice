@@ -13,11 +13,30 @@ const User = require('./modules/userModule');
 const Product = require('./modules/product');
 const Cart = require('./modules/cartModule');
 const CartItem = require('./modules/cartItemModule');
+const Order = require('./modules/orderModule');
+const OrderItem = require('./modules/orderItemModule');
 
 
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParse.urlencoded({ extended: false }));
+
+// attach a user instance to each request (ensure exists)
+app.use((req, res, next)=> {
+    User.findByPk(1).then(user => {
+        if (!user) {
+            return User.create({ name: 'Max', email: 'test@test.com' }).then(newUser => {
+                req.user = newUser;
+                next();
+            });
+        }
+        req.user = user;
+        next();
+    }).catch(err=> {
+        console.log(err);
+        next();
+    })
+})
 
 app.use('/admin', adminRouter);
 app.use(shopRouter);
@@ -30,15 +49,12 @@ User.hasOne(Cart);
 Cart.belongsTo(User)
 Cart.belongsToMany(Product, { through: CartItem });
 Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(User);
+User.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem} );
 
-app.use((req, res, next)=> {
-    User.findById(1).then(result => {
-        req.user = result;
-        next();
-    }).catch(err=> {
-        console.log(err);
-    })
-})
+
+
 
 
 app.set('view engine', 'ejs');
@@ -48,8 +64,10 @@ app.set('views', 'views');
 
 
 sequelize
-    .sync({ force: true })
-    // .sync()
+    // .sync({force: true})
+    // Use alter to update database schema without dropping tables
+    .sync({ alter: true })
+    .then(result=> {return User.findByPk(1)})
     .then(user => {
         if (!user) {
             return User.create({ name: 'Max', email: 'test@test.com' })
@@ -63,6 +81,5 @@ sequelize
     })
     .then(cart => {
         http.createServer(app).listen(3005, () => { console.log("Node server start 3005") })
-
     }
     ).catch(err => { console.log(err) })

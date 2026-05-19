@@ -23,7 +23,13 @@ exports.postAddProduct = (req, res, next) => {
         imgUrl: imgUrl,
         price: price,
         description: description,
-    }).then(result => { console.log("Product create==>", result) }).catch(err => { console.log(err) });
+    }).then(result => { 
+        console.log("Product create==>", result)
+        res.redirect('/admin/product-list')
+    })
+    .catch(err => { 
+        console.log(err) }
+    );
 }
 
 exports.getProducts = (req, res, next) => {
